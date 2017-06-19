@@ -1,8 +1,4 @@
-I'm going to make a banch of ToDo Apps in different coding style (paradigmas, patterns, architechuries etc.) 
-
-This is the second part. I used OOP metodology and MVC pattern.
-
-Inspired by CodeDojo
+#ToDo  OOP+MVC
 
 I'm going to make a bunch of ToDo Apps in different coding style (paradigmas, patterns, architectures etc.)
 
