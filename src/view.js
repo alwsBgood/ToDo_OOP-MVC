@@ -1,10 +1,14 @@
-import { createElement } from './helpers.js';
+import { createElement, EventEmitter } from './helpers.js';
 
-class View {
+class View extends EventEmitter {
   constructor() {
+    super();
+
     this.form = document.getElementById('todo-form');
     this.input = document.getElementById('todo-input');
     this.list = document.getElementById('todo-list')
+
+    this.form.addEventListener('submit', this.handleAdd.bind(this));
   }
 
   findListItem(id) {
@@ -36,9 +40,45 @@ class View {
   }
 
   handleToggle({ target }) {
-    listItem = target.parentNode;
+    const listItem = target.parentNode;
     const id = listItem.getAttribute('data-id');
     const completed = target.completed;
+
+    // update model
+  }
+
+  handleEdit({ target }) {
+    const listItem = target.parentNode;
+    const id = listItem.getAttribute('data-id');
+    const label = listItem.querySelector('.title');
+    const input = listItem.querySelector('.textfield');
+    const editButton = listItem.querySelector('button.edit');
+    const title = input.value;
+    const isEditing = listItem.classList.contains('editing');
+
+    if (isEditing) {
+      //update model
+    } else { 
+      input.value = label.textContent;
+      editButton.textContent = 'Сохранить';
+      listItem.classList.add('editing');
+    }
+  }
+
+  handleRemove( {target }) {
+    const listItem = target.parentNode;
+
+    //remove item from model
+  }
+
+  handleAdd(event) {
+    event.preventDefault();
+
+    if (!this.input.value) return alert("Введите название задачи");
+
+    const value = this.input.value;
+
+    this.emit('add', value)
   }
 
 
